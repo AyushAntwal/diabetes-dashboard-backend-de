@@ -3,7 +3,9 @@ const express = require("express");
 const { stateList } = require("../MongoDB/model");
 
 const mainRoute = express.Router();
-
+mainRoute.get("/", (req, res) => {
+  res.send("Server is running");
+});
 mainRoute.post("/", (req, res) => {
   const { Level1, Level2, Level3, Level4, Level5 } = req.body;
   stateList
