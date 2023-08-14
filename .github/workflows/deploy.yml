@@ -28,16 +28,10 @@ jobs:
       #     username: ${{ secrets.USER_NAME }}
       #     password: ${{ secrets.DEV_PASSWORD }}
 
-      - name: Executing remote command
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.DEV_HOST }}
-          username: ${{ secrets.USER_NAME }}
-          password: ${{ secrets.DEV_PASSWORD }}
-          script: |
-            sudo ln -s "/root/.nvm/versions/node/v18.16.1/bin/node" "/usr/local/bin/node"
-            sudo ln -s "/root/.nvm/versions/node/v18.16.1/bin/npm" "/usr/local/bin/npm"
-            sudo ln -s "/root/.nvm/versions/node/v18.16.1/bin/pm2" "/usr/local/bin/pm2"
-            cd /var/www/demo.thelattice.org/backend
-            sudo npm install
-            sudo pm2 restart diabetes-server
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build and Restart Server
+        run: |
+            npm run build 
+            pm2 restart diabetes-server
