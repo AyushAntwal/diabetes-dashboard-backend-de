@@ -13,11 +13,18 @@ jobs:
         node-version: [16.0] 
 
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node-version }}
+      - name: Checkout code
+        uses: actions/checkout@v2
 
+      - name: Set up Node.js version
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16.10.0"
+
+
+      - name: Install npm dependencies
+        run: |
+          npm install
       # Uncomment and modify this section for file copying if needed
       # - name: Copy files via SSH key
       #   uses: garygrossgarten/github-action-scp@release
@@ -27,9 +34,6 @@ jobs:
       #     host: ${{ secrets.DEV_HOST }}
       #     username: ${{ secrets.USER_NAME }}
       #     password: ${{ secrets.DEV_PASSWORD }}
-
-      - name: Install dependencies
-        run: npm install
 
       - name: Restart Server
         run: |
