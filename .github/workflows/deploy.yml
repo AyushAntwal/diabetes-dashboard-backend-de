@@ -26,9 +26,9 @@ jobs:
     - name: Executing remote  command
       uses: appleboy/ssh-action@master
       with:
-        host: ${{ secrets.DEV_HOST }}
-        username: ${{ secrets.USER_NAME }}
-        password: ${{ secrets.DEV_PASSWORD }}
+        host: ${{ secrets.HOST_IP_IN }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD_IN }}
         script: |
           sudo ln -s "/root/.nvm/versions/node/v18.16.1/bin/node" "/usr/local/bin/node"
           sudo ln -s "/root/.nvm/versions/node/v18.16.1/bin/npm" "/usr/local/bin/npm"
