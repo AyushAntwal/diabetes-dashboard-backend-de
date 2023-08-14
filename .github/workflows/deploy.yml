@@ -22,7 +22,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
     
-        
     - name: Executing remote  command
       uses: appleboy/ssh-action@master
       with:
