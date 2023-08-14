@@ -4,40 +4,40 @@ on:
   push:
     branches: [ "main" ]
   workflow_dispatch:
-  
-  
+
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [16.0]
+        node-version: [16.0] 
 
     steps:
-    - uses: actions/checkout@v1
-    - uses: actions/setup-node@v1
-      with:
-        node-version: '14.x'
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
 
-    # - name: copy file via ssh key
-    #   uses: garygrossgarten/github-action-scp@release
-    #   with:
-    #     local: "./"
-    #     remote: "/usr/project/beato-dev"
-    #     host: ${{ secrets.DEV_HOST }}
-    #     username: ${{ secrets.USER_NAME }}
-    #     password: ${{ secrets.DEV_PASSWORD }}
-        
-    - name: Executing remote  command
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.DEV_HOST }}
-        username: ${{ secrets.USER_NAME }}
-        password: ${{ secrets.DEV_PASSWORD }}
-        script: |
-          sudo ln -s "/root/.nvm/versions/node/v18.16.1/bin/node" "/usr/local/bin/node"
-          sudo ln -s "/root/.nvm/versions/node/v18.16.1/bin/npm" "/usr/local/bin/npm"
-          sudo ln -s "/root/.nvm/versions/node/v18.16.1/bin/pm2" "/usr/local/bin/pm2"
-          /var/www/demo.thelattice.org/backend
-          sudo npm install
-          sudo pm2 restart diabetes-server
+      # Uncomment and modify this section for file copying if needed
+      # - name: Copy files via SSH key
+      #   uses: garygrossgarten/github-action-scp@release
+      #   with:
+      #     local: "./"
+      #     remote: "/usr/project/beato-dev"
+      #     host: ${{ secrets.DEV_HOST }}
+      #     username: ${{ secrets.USER_NAME }}
+      #     password: ${{ secrets.DEV_PASSWORD }}
+
+      - name: Executing remote command
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DEV_HOST }}
+          username: ${{ secrets.USER_NAME }}
+          password: ${{ secrets.DEV_PASSWORD }}
+          script: |
+            sudo ln -s "/root/.nvm/versions/node/v18.16.1/bin/node" "/usr/local/bin/node"
+            sudo ln -s "/root/.nvm/versions/node/v18.16.1/bin/npm" "/usr/local/bin/npm"
+            sudo ln -s "/root/.nvm/versions/node/v18.16.1/bin/pm2" "/usr/local/bin/pm2"
+            cd /var/www/demo.thelattice.org/backend
+            sudo npm install
+            sudo pm2 restart diabetes-server
