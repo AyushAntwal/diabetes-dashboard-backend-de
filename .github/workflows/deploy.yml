@@ -31,7 +31,6 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build and Restart Server
+      - name: Restart Server
         run: |
-            npm run build 
             pm2 restart diabetes-server
