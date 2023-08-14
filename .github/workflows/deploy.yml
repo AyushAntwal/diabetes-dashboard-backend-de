@@ -40,4 +40,4 @@ jobs:
           sudo ln -s "/root/.nvm/versions/node/v18.16.1/bin/pm2" "/usr/local/bin/pm2"
           /var/www/demo.thelattice.org/backend
           sudo npm install
-          sudo pm2 restart dev
+          sudo pm2 restart diabetes-server
