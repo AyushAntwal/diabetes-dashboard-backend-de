@@ -32,6 +32,6 @@ jobs:
           sudo ln -s "/root/.nvm/versions/node/v18.16.1/bin/node" "/usr/local/bin/node"
           sudo ln -s "/root/.nvm/versions/node/v18.16.1/bin/npm" "/usr/local/bin/npm"
           sudo ln -s "/root/.nvm/versions/node/v18.16.1/bin/pm2" "/usr/local/bin/pm2"
-          cd /var/www/demo.thelattice.org/backend
+          cd /var/www/demo.daibetes.info/backend
           sudo npm install
-          sudo pm2 restart diabetes-server
+          sudo pm2 restart all
