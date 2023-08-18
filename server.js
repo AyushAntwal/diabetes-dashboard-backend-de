@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 
 
 
-app.use("/", mainRoute);
+app.use("/backend", mainRoute);
 
 app.listen(2100, () => {
   console.log("Server Is running on ", 2100);
